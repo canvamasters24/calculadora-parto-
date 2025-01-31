@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Fecha de Parto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 40px;
+        }
+        input, button {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+        }
+        #resultado {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function calcularFechaParto() {
+            let fechaFUM = document.getElementById("fum").value;
+            if (!fechaFUM) {
+                alert("Por favor, ingresa la fecha de tu última menstruación.");
+                return;
+            }
+            let fecha = new Date(fechaFUM);
+            fecha.setDate(fecha.getDate() + 280); // 280 días después de la FUM
+            let fechaParto = fecha.toLocaleDateString("es-ES", { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById("resultado").innerHTML = `<strong>Tu fecha estimada de parto es:</strong> ${fechaParto}`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Calculadora de Fecha de Parto</h2>
+    <label for="fum">Fecha de tu última menstruación:</label>
+    <input type="date" id="fum">
+    <button onclick="calcularFechaParto()">Calcular</button>
+    <p id="resultado"></p>
+</body>
+</html>
